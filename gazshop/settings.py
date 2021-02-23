@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'oscar.config.Shop',
+    # 'app.config.Shop',
     'oscar.apps.analytics.apps.AnalyticsConfig',
     'app.checkout.apps.CheckoutConfig',
     'oscar.apps.address.apps.AddressConfig',

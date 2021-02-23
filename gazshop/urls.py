@@ -16,8 +16,10 @@ Including another URLconf
 from django.apps import apps
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
                   path('i18n/', include('django.conf.urls.i18n')),
@@ -26,8 +28,10 @@ urlpatterns = [
                   # Nonetheless, it's often useful for debugging.
 
                   path('admin/', admin.site.urls),
-                    path('', include('avtogazkomplect.urls')),
-
-                  path('shop/', include(apps.get_app_config('oscar').urls[0]), name='shop'),
+                  path('', include('avtogazkomplect.urls')),
+                  # url(r'accounts/', RedirectView.as_view(url='/shop/accounts/')),
+                  url(r'^accounts/login', RedirectView.as_view(url='/shop/accounts/login/')),
+                  url(r'^accounts/profile/', RedirectView.as_view(url='/shop/accounts/profile/')),
+                  path('shop/', include(apps.get_app_config('oscar').urls[0])),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL,
                                                                                          document_root=settings.STATIC_ROOT)

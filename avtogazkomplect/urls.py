@@ -15,5 +15,6 @@ urlpatterns = [
     path('blog/<int:pk>',BlogDetailView.as_view()),
     path('MarksHBO/OMVL',views.omvl,name='omvl'),
     path('Warranty/',views.warranty,name='warranty'),
-    path('shop1/', views.shop1, name='shop1')
+    path('shop1/', views.shop1, name='shop1'),
+    # path('accounts/', views.accounts, name='accounts')
 ]
