@@ -10,4 +10,4 @@ from oscar.apps.customer import abstract_models
 class User(abstract_models.AbstractUser):
     # twitter_username = models.CharField(max_length=255, unique=True)
     user_discount = models.IntegerField(help_text='User discount', null=True, default=0)
-    user_phone = models.CharField(max_length=20, null=True, default='')
+    user_phone = models.CharField(help_text='User phone', max_length=20, null=True, default='')

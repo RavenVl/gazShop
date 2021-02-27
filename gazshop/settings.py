@@ -17,7 +17,6 @@ import environ
 location = lambda x: os.path.join(
     os.path.dirname(os.path.realpath(__file__)), x)
 
-
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False)
@@ -42,7 +41,7 @@ OSCAR_SHOP_NAME = 'Avtogazcomplect'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['avtogazkomplekt.ru', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -75,10 +74,13 @@ INSTALLED_APPS = [
     'oscar.apps.search.apps.SearchConfig',
     'oscar.apps.voucher.apps.VoucherConfig',
     'oscar.apps.wishlists.apps.WishlistsConfig',
-    'oscar.apps.dashboard.apps.DashboardConfig',
+    'app.dashboard.apps.DashboardConfig',
+    # 'oscar.apps.dashboard.apps.DashboardConfig',
     'oscar.apps.dashboard.reports.apps.ReportsDashboardConfig',
-    'oscar.apps.dashboard.users.apps.UsersDashboardConfig',
-    'oscar.apps.dashboard.orders.apps.OrdersDashboardConfig',
+    # 'oscar.apps.dashboard.users.apps.UsersDashboardConfig',
+    'app.dashboard.users.apps.UsersDashboardConfig',
+    # 'oscar.apps.dashboard.orders.apps.OrdersDashboardConfig',
+    'app.dashboard.orders.apps.OrdersDashboardConfig',
     'oscar.apps.dashboard.catalogue.apps.CatalogueDashboardConfig',
     'oscar.apps.dashboard.offers.apps.OffersDashboardConfig',
     'oscar.apps.dashboard.partners.apps.PartnersDashboardConfig',
@@ -198,8 +200,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
-
 STATIC_URL = '/static/'
 # STATIC_ROOT = location('public/static')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -210,10 +210,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-
-
-
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -235,9 +231,8 @@ OSCAR_ORDER_STATUS_PIPELINE = {
 OSCAR_DEFAULT_CURRENCY = 'RUB'
 AUTH_USER_MODEL = "user.User"
 
-
 # почты для получения писем
-RECIPIENTS_EMAIL = ['ravenvl71@gmail.com']
+RECIPIENTS_EMAIL = ['ravenvl71@gmail.com', 'avtogazkomplekt@mail.ru']
 # почта отправителя по умолчанию, та что верифицирована
 DEFAULT_FROM_EMAIL = 'admin@avtogazkomplekt.ru'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -248,6 +243,5 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-OSCAR_FROM_EMAIL='admin@avtogazkomplekt.ru'
+OSCAR_FROM_EMAIL = 'admin@avtogazkomplekt.ru'
 OSCAR_USE_LESS = False
-
