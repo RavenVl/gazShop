@@ -29,9 +29,9 @@ urlpatterns = [
 
                   path('admin/', admin.site.urls),
                   path('', include('avtogazkomplect.urls')),
-                  # url(r'accounts/', RedirectView.as_view(url='/shop/accounts/')),
                   url(r'^accounts/login', RedirectView.as_view(url='/shop/accounts/login/')),
                   url(r'^accounts/profile/', RedirectView.as_view(url='/shop/accounts/profile/')),
+                  url(r'^dashboard', RedirectView.as_view(url='/shop/dashboard')),
                   path('shop/', include(apps.get_app_config('oscar').urls[0])),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL,
                                                                                          document_root=settings.STATIC_ROOT)
