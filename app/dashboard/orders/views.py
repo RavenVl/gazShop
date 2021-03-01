@@ -1,8 +1,6 @@
 import datetime
-<<<<<<< HEAD
 import os
-=======
->>>>>>> 33179880cf6095d17f79dab2e871a2944f89ff01
+
 from collections import OrderedDict
 from decimal import Decimal as D
 from decimal import InvalidOperation
@@ -24,10 +22,7 @@ from oscar.core.loading import get_class, get_model
 from oscar.core.utils import datetime_combine, format_datetime
 from oscar.views import sort_queryset
 from oscar.views.generic import BulkEditMixin
-<<<<<<< HEAD
 import xlsxwriter
-=======
->>>>>>> 33179880cf6095d17f79dab2e871a2944f89ff01
 
 Partner = get_model('partner', 'Partner')
 Transaction = get_model('payment', 'Transaction')
@@ -365,10 +360,9 @@ class OrderListView(BulkEditMixin, ListView):
         return 'orders.csv'
 
     def download_selected_orders(self, request, orders):
-<<<<<<< HEAD
+
         # path_excel = 'media/hello.xlsx' # for local
-        #TODO Зависает кнопка отправления
-        #TODO Добавить наименование покупателя
+        # TODO Зависает кнопка отправления
         path_excel = 'hello.xlsx'
         workbook = xlsxwriter.Workbook(path_excel)
         worksheet = workbook.add_worksheet()
@@ -376,12 +370,12 @@ class OrderListView(BulkEditMixin, ListView):
         for order in orders:
             print(order.__dict__)
             str_number += 1
-            worksheet.write(f'A{str_number}', '№ ' + str(order.number))
-            worksheet.write(f'B{str_number}', 'Дата ' + str(format_datetime(order.date_placed, 'DATETIME_FORMAT')))
+            worksheet.write(f'A{str_number}', '№ ' + str(order.number) + 'Дата ' + str(format_datetime(order.date_placed, 'DATETIME_FORMAT')))
+            worksheet.write(f'B{str_number}', 'Покупатель ' + str(order.user.first_name))
             worksheet.write(f'C{str_number}', 'Кол. ' + str(order.num_items))
             worksheet.write(f'D{str_number}', 'Сумма ' + str(order.total_incl_tax))
             worksheet.write(f'E{str_number}', 'E-mail ' + str(order.email))
-            worksheet.write(f'F{str_number}', 'Адрес ' + str(order.total_incl_tax))
+            worksheet.write(f'F{str_number}', 'Адрес ' + str(order.shipping_address.name))
             # worksheet.write(f'F{str_number}', 'Адрес ' + str(order.total_incl_tax))
 
             str_number += 1
@@ -403,52 +397,6 @@ class OrderListView(BulkEditMixin, ListView):
         response = HttpResponse(fsock, content_type='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment; filename="orders.xlsx"'
 
-=======
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=%s' \
-            % self.get_download_filename(request)
-        writer = UnicodeCSVWriter(open_file=response)
-
-        meta_data = (('number', _('Order number')),
-                     ('value', _('Order value')),
-                     ('date', _('Date of purchase')),
-                     ('num_items', _('Number of items')),
-                     ('status', _('Order status')),
-                     ('customer', _('Customer email address')),
-                     ('shipping_address_name', _('Deliver to name')),
-                     ('billing_address_name', _('Bill to name')),
-                     )
-        columns = OrderedDict()
-        for k, v in meta_data:
-            columns[k] = v
-
-        writer.writerow(columns.values())
-        for order in orders:
-
-            for line in list(order._prefetched_objects_cache['lines']):
-                print(line.title)
-                print(line.upc)
-                print(line.quantity)
-                print(line.unit_price_excl_tax)
-
-
-            row = columns.copy()
-            row['number'] = order.number
-            row['value'] = order.total_incl_tax
-            row['date'] = format_datetime(order.date_placed, 'DATETIME_FORMAT')
-            row['num_items'] = order.num_items
-            row['status'] = order.status
-            row['customer'] = order.email
-            if order.shipping_address:
-                row['shipping_address_name'] = order.shipping_address.name
-            else:
-                row['shipping_address_name'] = ''
-            if order.billing_address:
-                row['billing_address_name'] = order.billing_address.name
-            else:
-                row['billing_address_name'] = ''
-            writer.writerow(row.values())
->>>>>>> 33179880cf6095d17f79dab2e871a2944f89ff01
         return response
 
     def change_order_statuses(self, request, orders):
