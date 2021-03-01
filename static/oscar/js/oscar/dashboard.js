@@ -272,8 +272,8 @@ var oscar = (function(o, $) {
             // via AJAX: https://api.jquery.com/on/#direct-and-delegated-events
             $(document.body).on('click', '[data-loading-text]', function(){
                 var form = $(this).parents("form");
-                if (!form || $(":invalid", form).length == 0)
-                    $(this).button('loading');
+                // if (!form || $(":invalid", form).length == 0)
+                //     $(this).button('loading');
             });
 
             // Display tabs that have invalid input fields

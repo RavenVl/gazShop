@@ -362,7 +362,6 @@ class OrderListView(BulkEditMixin, ListView):
     def download_selected_orders(self, request, orders):
 
         # path_excel = 'media/hello.xlsx' # for local
-        # TODO Зависает кнопка отправления
         path_excel = 'hello.xlsx'
         workbook = xlsxwriter.Workbook(path_excel)
         worksheet = workbook.add_worksheet()
